@@ -77,6 +77,7 @@ def convertTweetsToDataframe(tweet_objects, ENGLISH, encoding=True):
           date = str(date[1])+' '+str(date[2])+' '+str(date[3])+' '+str(date[5])
           favorite_count = ln['favorite_count']
           user = ln['user']
+          tweet_id = ln['id_str']
           if ENGLISH == True:
               lang = user['lang']
               if lang != 'en' and lang != 'en-gb':
@@ -102,7 +103,7 @@ def convertTweetsToDataframe(tweet_objects, ENGLISH, encoding=True):
           otweet = otweet.replace('\n','').replace('\r','')
           fout.write(date + '\t' + str(favorite_count)\
             +','+str(followers)+',"'+str(username)+'","'\
-            +str(location)+'","'+str(txt)+'","'+str(otweet)+'"\n')
+            +str(location)+'","'+str(txt)+'","'+str(tweet_id)+'","'+str(otweet)+'"\n')
       except UnicodeEncodeError:
           continue
       except KeyError:
@@ -113,7 +114,7 @@ def convertTweetsToDataframe(tweet_objects, ENGLISH, encoding=True):
   if encoding == True:
     df = pd.read_csv('tmp.dat',error_bad_lines=False,encoding='iso-8859-1',\
                     header=None,names=['date','followers',\
-                    'username','location','tweet','original_tweet'],\
+                    'username','location','tweet','id','original_tweet'],\
                      delimiter=',',index_col=False)
     print('Loaded utf-8 df.')
   else:
