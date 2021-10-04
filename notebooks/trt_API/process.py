@@ -57,6 +57,10 @@ def loadTweetObjects(input_dir):
 This function loads the tweets output from the
 loadTweetObjects() function and extracts the desired
 fields from the Tweet json.
+<<<<<<< HEAD
+=======
+
+>>>>>>> f267001ef71f06d1b8f180bada6cecdc1936cf0a
 #TODO: work on problems with encoding errors and make
 to handle emoticons
 '''
@@ -111,7 +115,11 @@ def convertTweetsToDataframe(tweet_objects, ENGLISH, encoding=True):
         continue
   fout.close()
   if encoding == True:
+<<<<<<< HEAD
     df = pd.read_csv('tmp.dat',error_bad_lines=False,encoding='utf-8',\
+=======
+    df = pd.read_csv('tmp.dat',error_bad_lines=False,encoding='iso-8859-1',\
+>>>>>>> f267001ef71f06d1b8f180bada6cecdc1936cf0a
                     header=None,names=['date','followers',\
                     'username','location','tweet','id','original_tweet'],\
                      delimiter=',',index_col=False)
@@ -184,6 +192,7 @@ def findTerms(df, terms_of_interest):
     df = pd.concat([df,tdf],axis=0)
   print ('Found ' + str(df.shape[0]) + " terms of "\
         + "interest.")
+<<<<<<< HEAD
   return df 
 
 
@@ -197,6 +206,10 @@ def cleanText(text):
     for char in spec_chars:
         text = text.str.replace(char, ' ')
     return text
+=======
+  return df  
+
+>>>>>>> f267001ef71f06d1b8f180bada6cecdc1936cf0a
 
 
 '''
@@ -210,10 +223,18 @@ def removeRetweets(df):
   df['RT'][df.tweet.astype(str).str[0:2] == 'RT'] = df.tweet.str.split(':',expand=True).iloc[:,0]
   tdf['rt'] = tdf['tweet'].str.split(':',\
    expand=True).iloc[:,0]
+<<<<<<< HEAD
   tdf.drop_duplicates('tweet', keep='first',\
+=======
+  tdf.drop_duplicates(subset=['rt'], keep='first',\
+>>>>>>> f267001ef71f06d1b8f180bada6cecdc1936cf0a
     inplace=True)
   tdf.rt.head()
   print("Removed " + str(init-tdf.shape[0]) + \
     " duplicates.")
   tdf = tdf.dropna()
+<<<<<<< HEAD
   return tdf, df
+=======
+  return tdf, df
+>>>>>>> f267001ef71f06d1b8f180bada6cecdc1936cf0a
