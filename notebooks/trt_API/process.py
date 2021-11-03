@@ -111,7 +111,11 @@ def convertTweetsToDataframe(tweet_objects, ENGLISH, encoding=True):
         continue
   fout.close()
   if encoding == True:
+<<<<<<< HEAD
     df = pd.read_csv('tmp.dat',error_bad_lines=False,encoding='iso-8859-1',\
+=======
+    df = pd.read_csv('tmp.dat',error_bad_lines=False,encoding='utf-8',\
+>>>>>>> 21e8110e3954f38c11dff32f0f3646b14fb3013b
                     header=None,names=['date','followers',\
                     'username','location','tweet','id','original_tweet'],\
                      delimiter=',',index_col=False)
@@ -184,8 +188,19 @@ def findTerms(df, terms_of_interest):
     df = pd.concat([df,tdf],axis=0)
   print ('Found ' + str(df.shape[0]) + " terms of "\
         + "interest.")
-  return df  
+  return df 
 
+
+'''
+This function replaces all the tweet words which contains 
+#, https, RT etc with an empty string.
+'''
+
+def cleanText(text):
+    spec_chars = ['_Ubiquitous']
+    for char in spec_chars:
+        text = text.str.replace(char, ' ')
+    return text
 
 
 '''
