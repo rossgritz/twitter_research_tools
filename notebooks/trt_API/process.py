@@ -210,7 +210,7 @@ def removeRetweets(df):
   df['RT'][df.tweet.astype(str).str[0:2] == 'RT'] = df.tweet.str.split(':',expand=True).iloc[:,0]
   tdf['rt'] = tdf['tweet'].str.split(':',\
    expand=True).iloc[:,0]
-  tdf.drop_duplicates('tweet', keep='first',\
+  tdf.drop_duplicates(subset=['rt'], keep='first',\
     inplace=True)
   tdf.rt.head()
   print("Removed " + str(init-tdf.shape[0]) + \
