@@ -111,11 +111,7 @@ def convertTweetsToDataframe(tweet_objects, ENGLISH, encoding=True):
         continue
   fout.close()
   if encoding == True:
-<<<<<<< HEAD
-    df = pd.read_csv('tmp.dat',error_bad_lines=False,encoding='iso-8859-1',\
-=======
     df = pd.read_csv('tmp.dat',error_bad_lines=False,encoding='utf-8',\
->>>>>>> 21e8110e3954f38c11dff32f0f3646b14fb3013b
                     header=None,names=['date','followers',\
                     'username','location','tweet','id','original_tweet'],\
                      delimiter=',',index_col=False)
